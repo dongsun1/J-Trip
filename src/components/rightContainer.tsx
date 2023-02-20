@@ -1,6 +1,7 @@
 import styled from "@emotion/styled";
+import { ReactNode } from "react";
 
-const BottomContainer = styled.div`
+const StyledRightContainer = styled.div`
   display: flex;
   justify-content: center;
   position: absolute;
@@ -14,4 +15,6 @@ const BottomContainer = styled.div`
   padding: 5px;
 `;
 
-export default BottomContainer;
+export default function RightContainer({ children }: { children: ReactNode }) {
+  return <StyledRightContainer>{children}</StyledRightContainer>;
+}

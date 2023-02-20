@@ -1,9 +1,10 @@
-import BottomContainer from "@/components/bottomContainer";
+import RightContainer from "@/components/rightContainer";
 import InputBox from "@/components/inputBox";
 import LeftContainer from "@/components/leftContainer";
 import styled from "@emotion/styled";
 import { useState } from "react";
 import { Map } from "react-kakao-maps-sdk";
+import { IDocuments } from "@/interfaces/search.interface";
 
 const MapContainer = styled.div`
   position: relative;
@@ -11,16 +12,25 @@ const MapContainer = styled.div`
 
 export default function Home() {
   const [map, setMap] = useState();
+  const [data, setData] = useState<IDocuments[]>();
+  const [page, setPage] = useState(1);
 
   const getPlaces = async (e: any) => {
     try {
       const ps = new kakao.maps.services.Places();
       if (e.target.value) {
-        ps.keywordSearch(e.target.value, (data, status, _pagination) => {
-          if (status === kakao.maps.services.Status.OK) {
-            console.info(data);
-          }
-        });
+        const options = { page };
+        ps.keywordSearch(
+          e.target.value,
+          (data, status, _pagination) => {
+            if (status === kakao.maps.services.Status.OK) {
+              if (data.length) {
+                setData(data);
+              }
+            }
+          },
+          options
+        );
       }
     } catch (error) {
       console.info(error);
@@ -41,12 +51,12 @@ export default function Home() {
           height: "100vh",
         }}
         level={12} // 지도의 확대 레벨
-        onCreate={setMap}
+        onCreate={() => setMap}
       />
       <LeftContainer>
         <InputBox onChange={getPlaces} />
       </LeftContainer>
-      <BottomContainer></BottomContainer>
+      <RightContainer></RightContainer>
     </MapContainer>
   );
 }
