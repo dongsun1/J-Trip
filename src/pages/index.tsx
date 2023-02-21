@@ -4,8 +4,6 @@ import styled from "@emotion/styled";
 import { useState } from "react";
 import { Map, MapMarker } from "react-kakao-maps-sdk";
 import { IDocument } from "@/interfaces/search.interface";
-import { List, ListItem, ListItemText, TextField } from "@mui/material";
-import SearchItem from "@/components/searchList";
 
 const MapContainer = styled.div`
   position: relative;
@@ -24,32 +22,36 @@ export default function Home() {
   const [markers, setMarkers] = useState<IMarker[]>([]);
 
   return (
-    <MapContainer>
-      <Map // 지도를 표시할 Container
-        center={{
-          // 지도의 중심좌표
-          lat: 36.1,
-          lng: 126,
-        }}
-        style={{
-          // 지도의 크기
-          width: "100%",
-          height: "100vh",
-        }}
-        level={12} // 지도의 확대 레벨
-        onCreate={() => setMap}
-      >
-        {markers.map((marker) => (
-          <MapMarker
-            key={`marker-${marker.document.address_name}-${marker.position.lat},${marker.position.lng}`}
-            position={marker.position}
-          >
-            <div style={{ color: "#000" }}>{marker.document.address_name}</div>
-          </MapMarker>
-        ))}
-      </Map>
+    <>
+      <MapContainer>
+        <Map // 지도를 표시할 Container
+          center={{
+            // 지도의 중심좌표
+            lat: 36.1,
+            lng: 126,
+          }}
+          style={{
+            // 지도의 크기
+            width: "100%",
+            height: "100vh",
+          }}
+          level={12} // 지도의 확대 레벨
+          onCreate={() => setMap}
+        >
+          {markers.map((marker) => (
+            <MapMarker
+              key={`marker-${marker.document.address_name}-${marker.position.lat},${marker.position.lng}`}
+              position={marker.position}
+            >
+              <div style={{ color: "#000" }}>
+                {marker.document.address_name}
+              </div>
+            </MapMarker>
+          ))}
+        </Map>
+        {/* <RightContainer></RightContainer> */}
+      </MapContainer>
       <LeftContainer />
-      {/* <RightContainer></RightContainer> */}
-    </MapContainer>
+    </>
   );
 }

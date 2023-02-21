@@ -3,6 +3,7 @@ import styled from "@emotion/styled";
 import Link from "next/link";
 
 const StyledSearchItem = styled.div`
+  width: 95%;
   height: 65px;
   padding: 5px;
   border-bottom: 1px solid #e2e2e2;
