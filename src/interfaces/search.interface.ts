@@ -1,7 +1,8 @@
-export interface IDocuments {
+export interface IDocument {
   address_name: string;
   category_group_code: string;
   category_group_name: string;
+  category_name: string;
   distance: string;
   id: string;
   phone: string;
@@ -24,6 +25,6 @@ export interface IMeta {
 }
 
 export interface searchData {
-  documents: IDocuments[];
+  documents: IDocument[];
   meta: IMeta;
 }

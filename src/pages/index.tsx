@@ -1,41 +1,27 @@
-import RightContainer from "@/components/rightContainer";
-import InputBox from "@/components/inputBox";
+// import RightContainer from "@/components/rightContainer";
 import LeftContainer from "@/components/leftContainer";
 import styled from "@emotion/styled";
 import { useState } from "react";
-import { Map } from "react-kakao-maps-sdk";
-import { IDocuments } from "@/interfaces/search.interface";
+import { Map, MapMarker } from "react-kakao-maps-sdk";
+import { IDocument } from "@/interfaces/search.interface";
+import { List, ListItem, ListItemText, TextField } from "@mui/material";
+import SearchItem from "@/components/searchList";
 
 const MapContainer = styled.div`
   position: relative;
 `;
 
+interface IMarker {
+  position: {
+    lat: number;
+    lng: number;
+  };
+  document: IDocument;
+}
+
 export default function Home() {
   const [map, setMap] = useState();
-  const [data, setData] = useState<IDocuments[]>();
-  const [page, setPage] = useState(1);
-
-  const getPlaces = async (e: any) => {
-    try {
-      const ps = new kakao.maps.services.Places();
-      if (e.target.value) {
-        const options = { page };
-        ps.keywordSearch(
-          e.target.value,
-          (data, status, _pagination) => {
-            if (status === kakao.maps.services.Status.OK) {
-              if (data.length) {
-                setData(data);
-              }
-            }
-          },
-          options
-        );
-      }
-    } catch (error) {
-      console.info(error);
-    }
-  };
+  const [markers, setMarkers] = useState<IMarker[]>([]);
 
   return (
     <MapContainer>
@@ -52,11 +38,18 @@ export default function Home() {
         }}
         level={12} // 지도의 확대 레벨
         onCreate={() => setMap}
-      />
-      <LeftContainer>
-        <InputBox onChange={getPlaces} />
-      </LeftContainer>
-      <RightContainer></RightContainer>
+      >
+        {markers.map((marker) => (
+          <MapMarker
+            key={`marker-${marker.document.address_name}-${marker.position.lat},${marker.position.lng}`}
+            position={marker.position}
+          >
+            <div style={{ color: "#000" }}>{marker.document.address_name}</div>
+          </MapMarker>
+        ))}
+      </Map>
+      <LeftContainer />
+      {/* <RightContainer></RightContainer> */}
     </MapContainer>
   );
 }
