@@ -1,44 +1,8 @@
 import { IDocument } from "@/interfaces/search.interface";
-import styled from "@emotion/styled";
-import { Pagination, TextField } from "@mui/material";
+import { TextField } from "@mui/material";
 import { useEffect, useState } from "react";
-import SearchItem from "./searchItem";
-
-const StyledLeftContainer = styled.div`
-  display: flex;
-  flex-direction: column;
-  position: absolute;
-  top: 0px;
-  left: 0px;
-  z-index: 1;
-  width: 400px;
-  height: 100%;
-  background-color: white;
-  overflow: auto;
-
-  > div {
-    height: 100%;
-    padding: 5px;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-  }
-`;
-
-const SearchItemList = styled.div`
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  margin-top: 10px;
-  width: 100%;
-`;
-
-const CustomPagination = styled(Pagination)`
-  width: 100%;
-  margin: 5px 0;
-  display: flex;
-  justify-content: center;
-`;
+import SearchItem from "@/components/searchItem";
+import { CustomPagination, SearchItemList, StyledLeftContainer } from "./style";
 
 export default function LeftContainer() {
   const [mounted, setMounted] = useState(false);
