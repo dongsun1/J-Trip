@@ -27,7 +27,6 @@
     "zustand": "^4.3.3"
   },
   "devDependencies": {
-    "@emotion/babel-plugin": "^11.10.6",
     "kakao.maps.d.ts": "^0.1.33"
   }
 }
