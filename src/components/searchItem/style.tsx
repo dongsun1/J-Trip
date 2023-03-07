@@ -1,5 +1,8 @@
 import styled from "@emotion/styled";
 import Link from "next/link";
+import BookmarkIcon from "@mui/icons-material/Bookmark";
+import BookmarkBorderIcon from "@mui/icons-material/BookmarkBorder";
+import TrendingFlatIcon from "@mui/icons-material/TrendingFlat";
 
 export const StyledSearchItem = styled.div`
   width: 95%;
@@ -41,4 +44,16 @@ export const SubContainer = styled.div`
 export const SubText = styled.span`
   font-size: 12px;
   margin-top: 5px;
+`;
+
+export const StyledBookmarkIcon = styled(BookmarkIcon)`
+  cursor: pointer;
+`;
+
+export const StyledBookmarkBorderIcon = styled(BookmarkBorderIcon)`
+  cursor: pointer;
+`;
+
+export const StyledTrendingFlatIcon = styled(TrendingFlatIcon)`
+  cursor: pointer;
 `;

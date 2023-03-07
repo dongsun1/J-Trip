@@ -8,7 +8,7 @@ export const StyledLeftContainer = styled.div`
   top: 0px;
   left: 0px;
   z-index: 1;
-  width: 400px;
+  width: 450px;
   height: 100%;
   background-color: white;
   overflow: auto;

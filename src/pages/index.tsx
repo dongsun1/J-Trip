@@ -3,49 +3,34 @@ import LeftContainer from "@/components/leftContainer";
 import styled from "@emotion/styled";
 import { useState } from "react";
 import { Map, MapMarker } from "react-kakao-maps-sdk";
-import { IDocument } from "@/interfaces/search.interface";
+import { useMapStore } from "@/store/map";
 
 const MapContainer = styled.div`
   position: relative;
 `;
 
-interface IMarker {
-  position: {
-    lat: number;
-    lng: number;
-  };
-  document: IDocument;
-}
-
 export default function Home() {
   const [map, setMap] = useState();
-  const [markers, setMarkers] = useState<IMarker[]>([]);
+  const { center, level, markers } = useMapStore();
 
   return (
     <>
       <MapContainer>
-        <Map // 지도를 표시할 Container
-          center={{
-            // 지도의 중심좌표
-            lat: 36.1,
-            lng: 126,
-          }}
+        <Map
+          center={center}
           style={{
-            // 지도의 크기
             width: "100%",
             height: "100vh",
           }}
-          level={12} // 지도의 확대 레벨
+          level={level}
           onCreate={() => setMap}
         >
-          {markers.map((marker) => (
+          {markers.map((marker, i) => (
             <MapMarker
-              key={`marker-${marker.document.address_name}-${marker.position.lat},${marker.position.lng}`}
-              position={marker.position}
+              key={`marker-${i}-${marker.x},${marker.y}`}
+              position={{ lng: Number(marker.x), lat: Number(marker.y) }}
             >
-              <div style={{ color: "#000" }}>
-                {marker.document.address_name}
-              </div>
+              <div style={{ color: "#000" }}>{i}</div>
             </MapMarker>
           ))}
         </Map>

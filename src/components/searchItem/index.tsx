@@ -1,6 +1,7 @@
 import { IDocument } from "@/interfaces/search.interface";
-import BookmarkIcon from "@mui/icons-material/Bookmark";
-import BookmarkBorderIcon from "@mui/icons-material/BookmarkBorder";
+import { useMapStore } from "@/store/map";
+import { useState } from "react";
+
 import {
   SubText,
   CategoryName,
@@ -8,12 +9,36 @@ import {
   StyledSearchItem,
   SubContainer,
   TitleContainer,
+  StyledBookmarkIcon,
+  StyledBookmarkBorderIcon,
+  StyledTrendingFlatIcon,
 } from "./style";
 
 export default function SearchItem({ data }: { data: IDocument }) {
+  const { markers, setCenter, setLevel, setMarkers, popMarker } = useMapStore();
+  const [isBookmarked, setIsBookmarked] = useState(
+    Boolean(markers.filter(({ id }) => id === data.id).length)
+  );
+
   const categoryNameArr = data.category_name.split(" ");
   const categoryName = categoryNameArr[categoryNameArr.length - 1];
-  let isBookmarked = false;
+
+  const onClickBookmark = (ck: boolean) => {
+    if (ck) {
+      setMarkers([data]);
+      setCenter({ lng: Number(data.x), lat: Number(data.y) });
+      setLevel(6);
+      setIsBookmarked(true);
+    } else {
+      popMarker(data.id);
+      setIsBookmarked(false);
+    }
+  };
+
+  const onClickMove = () => {
+    setCenter({ lng: Number(data.x), lat: Number(data.y) });
+    setLevel(6);
+  };
 
   return (
     <StyledSearchItem>
@@ -24,7 +49,14 @@ export default function SearchItem({ data }: { data: IDocument }) {
           </PlaceName>
           <CategoryName>{categoryName}</CategoryName>
         </div>
-        {isBookmarked ? <BookmarkIcon /> : <BookmarkBorderIcon />}
+        <div>
+          <StyledTrendingFlatIcon onClick={() => onClickMove()} />
+          {isBookmarked ? (
+            <StyledBookmarkIcon onClick={() => onClickBookmark(false)} />
+          ) : (
+            <StyledBookmarkBorderIcon onClick={() => onClickBookmark(true)} />
+          )}
+        </div>
       </TitleContainer>
       <SubContainer>
         <SubText>
