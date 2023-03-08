@@ -13,4 +13,10 @@ export interface IUseMapStore {
   markers: IDocument[];
   setMarkers: (markers: IDocument[]) => void;
   popMarker: (id: string) => void;
+  curId: string;
+  setCurId: (curId: string) => void;
+  startId: string;
+  setStartId: (startId: string) => void;
+  endId: string;
+  setEndId: (endId: string) => void;
 }

@@ -32,8 +32,7 @@ export const SearchItemList = styled.div`
 
 export const CustomPagination = styled(Pagination)`
   width: 100%;
-  height: 100%;
-  margin: 5px 0;
+  margin-top: 20px;
   display: flex;
   justify-content: center;
 `;

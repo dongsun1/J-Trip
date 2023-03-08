@@ -15,7 +15,8 @@ import {
 } from "./style";
 
 export default function SearchItem({ data }: { data: IDocument }) {
-  const { markers, setCenter, setLevel, setMarkers, popMarker } = useMapStore();
+  const { markers, setCenter, setLevel, setMarkers, popMarker, setCurId } =
+    useMapStore();
   const [isBookmarked, setIsBookmarked] = useState(
     Boolean(markers.filter(({ id }) => id === data.id).length)
   );
@@ -27,17 +28,19 @@ export default function SearchItem({ data }: { data: IDocument }) {
     if (ck) {
       setMarkers([data]);
       setCenter({ lng: Number(data.x), lat: Number(data.y) });
-      setLevel(6);
+      setLevel(9);
       setIsBookmarked(true);
+      setCurId(data.id);
     } else {
       popMarker(data.id);
       setIsBookmarked(false);
+      setCurId("");
     }
   };
 
   const onClickMove = () => {
     setCenter({ lng: Number(data.x), lat: Number(data.y) });
-    setLevel(6);
+    setLevel(9);
   };
 
   return (

@@ -1,5 +1,5 @@
 import { IDocument } from "@/interfaces/search.interface";
-import create from "zustand";
+import { create } from "zustand";
 import { IPosition, IUseMapStore } from "./store.interface";
 
 export const useMapStore = create<IUseMapStore>((set) => ({
@@ -15,4 +15,10 @@ export const useMapStore = create<IUseMapStore>((set) => ({
       const deleted = state.markers.filter(({ id: _id }) => _id !== id);
       return { ...state, markers: [...deleted] };
     }),
+  curId: "",
+  setCurId: (curId: string) => set(() => ({ curId })),
+  startId: "",
+  setStartId: (startId: string) => set(() => ({ startId })),
+  endId: "",
+  setEndId: (endId: string) => set(() => ({ endId })),
 }));

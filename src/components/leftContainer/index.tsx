@@ -26,11 +26,10 @@ export default function LeftContainer() {
             keyword,
             (data, status, _pagination) => {
               if (status === kakao.maps.services.Status.OK) {
-                if (data.length) {
-                  setData(data);
-                  setTotal(Math.ceil(_pagination.totalCount / 15));
-                  console.info(_pagination);
-                }
+                setData(data);
+                setTotal(Math.ceil(_pagination.totalCount / 15));
+              } else if (status === kakao.maps.services.Status.ZERO_RESULT) {
+                alert("검색된 장소가 없습니다.");
               }
             },
             options
