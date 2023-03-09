@@ -30,6 +30,8 @@ export default function InfoWindow({ marker }: { marker: IDocument }) {
         `https://map.kakao.com/link/from/${id}/to/${endId}`,
         "_blank"
       );
+      setStartId("");
+      setEndId("");
     }
   };
 
@@ -42,6 +44,8 @@ export default function InfoWindow({ marker }: { marker: IDocument }) {
         `https://map.kakao.com/link/from/${startId}/to/${id}`,
         "_blank"
       );
+      setStartId("");
+      setEndId("");
     }
   };
 

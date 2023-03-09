@@ -33,22 +33,22 @@ export default function Home() {
               image={
                 marker.id === startId
                   ? {
-                      src: "https://t1.daumcdn.net/localimg/localimages/07/2018/pc/flagImg/blue_b.png",
+                      src: "/start.png",
                       size: {
-                        width: 37,
+                        width: 30,
                         height: 42,
                       },
                     }
                   : marker.id === endId
                   ? {
-                      src: "https://t1.daumcdn.net/localimg/localimages/07/2018/pc/flagImg/red_b.png",
+                      src: "/end.png",
                       size: {
-                        width: 37,
+                        width: 30,
                         height: 42,
                       },
                     }
                   : {
-                      src: "https://t1.daumcdn.net/mapjsapi/images/marker.png",
+                      src: "/default.png",
                       size: {
                         width: 29,
                         height: 42,
